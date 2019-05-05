@@ -1,18 +1,6 @@
-.Div {
-	position: relative;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
 .Background {
 	max-height: 100vh;
 	width: 100%;
 	z-index: -1;
 }
 
-.Gallows {
-	position: absolute;
-	z-index: 0;
-	width: 40%;
-}
