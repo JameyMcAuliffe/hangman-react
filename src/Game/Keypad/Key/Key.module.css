@@ -1,0 +1,20 @@
+.Key {
+	display: flex;
+	border: 1px solid black;
+	height: 40px;
+	width: 40px;
+	align-items: center;
+	justify-content: center;
+	margin: 7px;
+	background-color: #46c42d;
+	color: white;
+	border-radius: 5px;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.Key:hover {
+	background-color: #d68e00;
+	color: black;
+	cursor: pointer;
+}
