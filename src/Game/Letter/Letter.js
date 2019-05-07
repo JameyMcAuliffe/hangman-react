@@ -4,7 +4,7 @@ import classes from './Letter.module.css';
 
 const Letter = (props) => {
 	return (
-		<h3 className={classes.Letter}>Letter</h3>
+		<h1 className={classes.Letter}>{props.letter}</h1>
 	);
 };
 

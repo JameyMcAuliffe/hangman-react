@@ -1,5 +1,7 @@
 .Letter {
-	position: absolute;
+	/*position: absolute;
 	z-index: 0;
-	bottom: 10%;
+	bottom: 10%;*/
+	text-decoration: underline;
+	padding: 0px 20px;
 }
