@@ -1,57 +1,72 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
 import classes from './Keypad.module.css';
 import Key from './Key/Key';
 
-const Keypad = () => {
+const Keypad = (props) => {
 
-	const letterClick = (event) => {
-		console.log(event.target.innerHTML);
-	}
+	let letterArray = [
+		{letter: 'A', hasBeenSelected: false},
+		{letter: 'B', hasBeenSelected: false},
+		{letter: 'C', hasBeenSelected: false},
+		{letter: 'D', hasBeenSelected: false},
+		{letter: 'E', hasBeenSelected: false},
+		{letter: 'F', hasBeenSelected: false},
+		{letter: 'G', hasBeenSelected: false},
+		{letter: 'H', hasBeenSelected: false},
+		{letter: 'I', hasBeenSelected: false},
+		{letter: 'J', hasBeenSelected: false},
+		{letter: 'K', hasBeenSelected: false},
+		{letter: 'L', hasBeenSelected: false},
+		{letter: 'M', hasBeenSelected: false},
+		{letter: 'N', hasBeenSelected: false},
+		{letter: 'O', hasBeenSelected: false},
+		{letter: 'P', hasBeenSelected: false},
+		{letter: 'Q', hasBeenSelected: false},
+		{letter: 'R', hasBeenSelected: false},
+		{letter: 'S', hasBeenSelected: false},
+		{letter: 'T', hasBeenSelected: false},
+		{letter: 'U', hasBeenSelected: false},
+		{letter: 'V', hasBeenSelected: false},
+		{letter: 'W', hasBeenSelected: false},
+		{letter: 'X', hasBeenSelected: false},
+		{letter: 'Y', hasBeenSelected: false},
+		{letter: 'Z', hasBeenSelected: false}
+	];
+
+	let selectedTarget = props.selectedTarget;
+
+	const [letterState, setLetterState] = useState(letterArray); 	
+
+
+	//add index
+	useEffect(() => {
+		letterState.map((letter, i) => {
+			if(letter.letter === selectedTarget && !letter.hasBeenSelected) {
+				let updatedLetterState = [...letterState];
+				updatedLetterState[i].hasBeenSelected = true;
+				setLetterState(updatedLetterState);
+			} 
+
+			return [...letterState];
+		});
+	})
+
+	let renderedLetters = letterState.map((letter, i) => {
+		return <Key 
+						letter={letter.letter} 
+						letterClick={props.letterClick}  
+						key={i}
+						selected={letter.hasBeenSelected}/>
+	});
 
 	return (
-		<div>
-			<div className={classes.KeypadDiv}>
-				<Key letter="A" val="a" letterClick={letterClick}/>
-				<Key letter="B" val="b" letterClick={letterClick}/>
-				<Key letter="C" val="c" letterClick={letterClick}/>
-				<Key letter="D" val="d" letterClick={letterClick}/>
-				<Key letter="E" val="e" letterClick={letterClick}/>
-			</div>
-			<div className={classes.KeypadDiv}>
-				<Key letter="F" val="f" letterClick={letterClick}/>
-				<Key letter="G" val="g" letterClick={letterClick}/>
-				<Key letter="H" val="h" letterClick={letterClick}/>
-				<Key letter="I" val="i" letterClick={letterClick}/>
-				<Key letter="J" val="j" letterClick={letterClick}/>
-			</div>
-			<div className={classes.KeypadDiv}>
-				<Key letter="K" val="k" letterClick={letterClick}/>
-				<Key letter="L" val="l" letterClick={letterClick}/>
-				<Key letter="M" val="m" letterClick={letterClick}/>
-				<Key letter="N" val="n" letterClick={letterClick}/>
-				<Key letter="O" val="o" letterClick={letterClick}/>
-			</div>
-			<div className={classes.KeypadDiv}>
-				<Key letter="P" val="p" letterClick={letterClick}/>
-				<Key letter="Q" val="q" letterClick={letterClick}/>
-				<Key letter="R" val="r" letterClick={letterClick}/>
-				<Key letter="S" val="s" letterClick={letterClick}/>
-				<Key letter="T" val="t" letterClick={letterClick}/>
-			</div>
-			<div className={classes.KeypadDiv}>
-				<Key letter="U" val="u" letterClick={letterClick}/>
-				<Key letter="V" val="v" letterClick={letterClick}/>
-				<Key letter="W" val="w" letterClick={letterClick}/>
-				<Key letter="X" val="x" letterClick={letterClick}/>
-				<Key letter="Y" val="y" letterClick={letterClick}/>
-			</div>
-			<div className={classes.KeypadDiv}>
-				<Key letter="Z" val="z" letterClick={letterClick}/>
-			</div>
+		<div className={classes.KeypadDiv}>
+			{renderedLetters}
 		</div>
 	);
 	
 }
 
 export default Keypad;
+
