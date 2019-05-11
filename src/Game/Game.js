@@ -7,15 +7,43 @@ import Letter from './Letter/Letter';
 import Keypad from './Keypad/Keypad';
 
 const Game = () => {
-	const [word, setWord] = useState('Hangman');
 
+	let word = 'Hangman';
+	let splitWord = word.split('');
+	let objectArray = [];
+	splitWord.map((word, i) => {
+		let objectItem = {letter: word, hasBeenSelected: false};
+		objectArray[i] = objectItem;
+		return objectArray;
+	});
+
+	const [wordState, setWordState] = useState(objectArray);
+	const [letterGuess, setLetterGuess] = useState(null);
+
+	let guessCheck = () => {
+		wordState.map((letter, i) => {
+			if(letterGuess === letter.letter.toUpperCase() && !letter.hasBeenSelected) {
+				console.log('update');
+				let updatedWordState = [...wordState];
+				updatedWordState[i].hasBeenSelected = true;
+				setWordState(updatedWordState);
+			}
+
+			return [...wordState];
+		})
+	}
+	
 	useEffect(() => {
-		
+		guessCheck();
 	}); 
 
-	let splitWord = word.split('').map((letter, i) => {
-		return <Letter key={i} letter={letter} />
+	let renderedWord = wordState.map((letter, i) => {
+		return <Letter key={i} letter={letter.hasBeenSelected ? letter.letter : '__'} />
 	});
+
+	let handleLetterSelect = (e) => {
+		setLetterGuess(e.target.innerHTML.toUpperCase());
+	}
 	 
 
 	return (
@@ -23,10 +51,10 @@ const Game = () => {
 			<Background />
 			<Gallows />
 			<div className={classes.LetterDiv}>
-				{splitWord}
+				{renderedWord}
 			</div>
 			<div className={classes.KeypadDiv}>
-				<Keypad />
+				<Keypad letterClick={handleLetterSelect} selectedTarget={letterGuess}/>
 			</div>
 		</div>
 	);
