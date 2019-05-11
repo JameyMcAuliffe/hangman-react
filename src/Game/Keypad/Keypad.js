@@ -38,8 +38,6 @@ const Keypad = (props) => {
 
 	const [letterState, setLetterState] = useState(letterArray); 	
 
-
-	//add index
 	useEffect(() => {
 		letterState.map((letter, i) => {
 			if(letter.letter === selectedTarget && !letter.hasBeenSelected) {

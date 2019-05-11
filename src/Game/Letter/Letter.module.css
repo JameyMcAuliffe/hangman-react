@@ -1,7 +1,12 @@
 .Letter {
-	/*position: absolute;
-	z-index: 0;
-	bottom: 10%;*/
-	text-decoration: underline;
-	padding: 0px 20px;
+	/*text-decoration: underline;*/
+	margin: 0px 7px;
+	padding: 0px 10px;
 }
+
+.CorrectGuess {
+	margin: 0px 7px;
+	padding: 0px 10px;
+	background-color: turquoise;
+}
+

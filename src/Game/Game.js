@@ -11,6 +11,8 @@ const Game = () => {
 	let word = 'Hangman';
 	let splitWord = word.split('');
 	let objectArray = [];
+
+	//Setup initial structure for wordState
 	splitWord.map((word, i) => {
 		let objectItem = {letter: word, hasBeenSelected: false};
 		objectArray[i] = objectItem;
@@ -19,14 +21,18 @@ const Game = () => {
 
 	const [wordState, setWordState] = useState(objectArray);
 	const [letterGuess, setLetterGuess] = useState(null);
+	const [correctGuess, setCorrectGuess] = useState(null);
 
 	let guessCheck = () => {
 		wordState.map((letter, i) => {
 			if(letterGuess === letter.letter.toUpperCase() && !letter.hasBeenSelected) {
-				console.log('update');
 				let updatedWordState = [...wordState];
 				updatedWordState[i].hasBeenSelected = true;
 				setWordState(updatedWordState);
+				setCorrectGuess(true);
+				setTimeout(() => {
+					setCorrectGuess(null);
+				}, 1000)
 			}
 
 			return [...wordState];
@@ -38,7 +44,7 @@ const Game = () => {
 	}); 
 
 	let renderedWord = wordState.map((letter, i) => {
-		return <Letter key={i} letter={letter.hasBeenSelected ? letter.letter : '__'} />
+		return <Letter key={i} correctGuess={correctGuess && letterGuess === letter.letter.toUpperCase() ? true : null} letter={letter.hasBeenSelected ? letter.letter : '__'} />
 	});
 
 	let handleLetterSelect = (e) => {
