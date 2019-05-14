@@ -19,3 +19,11 @@
 	bottom: 7%;
 }
 
+.FigureDiv {
+	display: flex;
+	flex-direction: row;
+	position: absolute;
+	z-index: 0;
+	top: 2%;
+}
+
