@@ -5,6 +5,7 @@ import Background from './Background/Background';
 import Gallows from './Background/Gallows/Gallows'
 import Letter from './Letter/Letter';
 import Keypad from './Keypad/Keypad';
+import Figure from './Figure/Figure';
 
 const Game = () => {
 
@@ -13,15 +14,18 @@ const Game = () => {
 	let objectArray = [];
 
 	//Setup initial structure for wordState
-	splitWord.map((word, i) => {
+	splitWord.map((word) => {
 		let objectItem = {letter: word, hasBeenSelected: false};
-		objectArray[i] = objectItem;
+		objectArray.push(objectItem);
 		return objectArray;
 	});
 
+
 	const [wordState, setWordState] = useState(objectArray);
 	const [letterGuess, setLetterGuess] = useState(null);
+	const [guessMade, setGuessMade] = useState(false);
 	const [correctGuess, setCorrectGuess] = useState(null);
+	const [missCount, setMissCount] = useState(0);
 
 	let guessCheck = () => {
 		wordState.map((letter, i) => {
@@ -34,13 +38,27 @@ const Game = () => {
 					setCorrectGuess(null);
 				}, 1000)
 			}
+		
+			return wordState;
+		});
+	}
 
-			return [...wordState];
-		})
+	let missCheck = () => {
+	
+		let upperCaseArray = splitWord.map((letter) => {
+			return letter.toUpperCase();
+		});
+
+		if (upperCaseArray.indexOf(letterGuess) === -1 && guessMade) {
+			let newCount = missCount + 1;
+			setMissCount(newCount);
+			setGuessMade(false);
+		}
 	}
 	
 	useEffect(() => {
 		guessCheck();
+		missCheck();
 	}); 
 
 	let renderedWord = wordState.map((letter, i) => {
@@ -49,12 +67,22 @@ const Game = () => {
 
 	let handleLetterSelect = (e) => {
 		setLetterGuess(e.target.innerHTML.toUpperCase());
+		setGuessMade(true);
 	}
+
+	let missesArray = [1, 2, 3, 4, 5, 6];
+
+	let renderedFigures = missesArray.map((i) => {
+		return <Figure key={i} number={i} missCount={missCount}/>
+	})
 	 
 
 	return (
 		<div className={classes.MainDiv}>
 			<Background />
+			<div className={classes.FigureDiv}>
+				{renderedFigures}
+			</div>
 			<Gallows />
 			<div className={classes.LetterDiv}>
 				{renderedWord}

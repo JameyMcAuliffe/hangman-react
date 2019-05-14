@@ -1,0 +1,25 @@
+.FigureDiv {
+	background-color: green;
+	padding-top: 3px;
+	border-radius: 5px;
+	margin: 0px 5px;
+}
+
+.MissedFigureDiv {
+	background-color: gray;
+	padding-top: 3px;
+	border-radius: 5px;
+	margin: 0px 5px;
+}
+
+.MissedFigureRedDiv {
+	background-color: red;
+	padding-top: 3px;
+	border-radius: 5px;
+	margin: 0px 5px;
+}
+
+.Figure {
+	width: 40px;
+}
+
