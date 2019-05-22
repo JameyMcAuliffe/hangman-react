@@ -48,7 +48,17 @@ const Keypad = (props) => {
 
 			return [...letterState];
 		});
-	})
+	});
+
+	useEffect(() => {
+		if (props.endGame) {
+			let updatedLetterState = letterState.map((letter) => {
+				letter.hasBeenSelected = true;
+				return letter;
+			});
+			setLetterState(updatedLetterState);
+		}
+	}, [props.endGame, letterState]);
 
 	let renderedLetters = letterState.map((letter, i) => {
 		return <Key 

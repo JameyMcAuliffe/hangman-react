@@ -18,6 +18,7 @@ const Game = () => {
 	const [guessMade, setGuessMade] = useState(false);
 	const [correctGuess, setCorrectGuess] = useState(null);
 	const [missCount, setMissCount] = useState(0);
+	const [endGame, setEndGame] = useState(false);
 
 	let missesArray = [1, 2, 3, 4, 5, 6];
 	let objectArray = [];
@@ -27,7 +28,6 @@ const Game = () => {
 		getWord()
 			.then(data => {
 				console.log(data.data.word);
-				//setSplitWord(data.data.word.toUpperCase().split(''));
 				return data.data.word.toUpperCase().split('');
 			})
 			.then (wordArray => {
@@ -83,17 +83,23 @@ const Game = () => {
 		missCheck();
 	}); 
 
-	if (wordState !== null) {
-		renderedWord = wordState.map((letter, i) => {
-			return <Letter key={i} correctGuess={correctGuess && letterGuess === letter.letter.toUpperCase() ? true : null} letter={letter.hasBeenSelected ? letter.letter : '__'} />
-		});
-	}	
-	
+	useEffect(() => {
+		if(missCount === missesArray.length) {
+			//console.log('Game over');
+			setEndGame(true);
+		}
+	}, [missCount, missesArray]);
 
 	let handleLetterSelect = (e) => {
 		setLetterGuess(e.target.innerHTML.toUpperCase());
 		setGuessMade(true);
 	}
+
+	if (wordState !== null) {
+		renderedWord = wordState.map((letter, i) => {
+			return <Letter key={i} correctGuess={correctGuess && letterGuess === letter.letter.toUpperCase() ? true : null} letter={letter.hasBeenSelected ? letter.letter : '__'} />
+		});
+	}	
 
 	let renderedFigures = missesArray.map((i) => {
 		return <Figure key={i} number={i} missCount={missCount}/>
@@ -111,7 +117,7 @@ const Game = () => {
 				{wordState !== null ? renderedWord : null}
 			</div>
 			<div className={classes.KeypadDiv}>
-				<Keypad letterClick={handleLetterSelect} selectedTarget={letterGuess}/>
+				<Keypad endGame={endGame} letterClick={handleLetterSelect} selectedTarget={letterGuess}/>
 			</div>
 		</div>
 	);
