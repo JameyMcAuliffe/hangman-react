@@ -1,18 +1,23 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
 import './App.css';
 
 import Game from './Game/Game';
+import Home from './Home/Home';
 
 function App() {
   return (
-    <div className="App">
-      <Game />
-    </div>
+  	<Router>
+	    <div className="App">
+	    	<Switch>
+	    		<Route exact path="/" component={Home} />
+	    		<Route exact path="/game" component={Game} />
+	      </Switch>
+	    </div>
+	  </Router>
   );
 }
 
 export default App;
 
-
-// <img src={Gallows} alt="gallows" style={{"width": "40%", "backgroundColor": "beige"}}/>
-//<img src={Background} alt="background" style={{"height": "vh"}}/>
