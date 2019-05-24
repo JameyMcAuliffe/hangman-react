@@ -6,6 +6,7 @@ import Gallows from './Background/Gallows/Gallows'
 import Letter from './Letter/Letter';
 import Keypad from './Keypad/Keypad';
 import Figure from './Figure/Figure';
+import EndingMessage from './EndingMessage/EndingMessage';
 import { getWord } from '../API/API';
 
 const Game = () => {
@@ -19,6 +20,7 @@ const Game = () => {
 	const [correctGuess, setCorrectGuess] = useState(null);
 	const [missCount, setMissCount] = useState(0);
 	const [endGame, setEndGame] = useState(false);
+	const [outcome, setOutcome] = useState(null);
 
 	let missesArray = [1, 2, 3, 4, 5, 6];
 	let objectArray = [];
@@ -44,6 +46,7 @@ const Game = () => {
 				});
 					setWordState(objectArray);
 			});
+			// eslint-disable-next-line
 	}, []);
 
 	let guessCheck = () => {
@@ -56,7 +59,7 @@ const Game = () => {
 					setCorrectGuess(true);
 					setTimeout(() => {
 						setCorrectGuess(null);
-					}, 1000)
+					}, 1000);
 				}
 			
 				return wordState;
@@ -77,18 +80,38 @@ const Game = () => {
 			}
 		}
 	}
+
+	let winCheck = () => {
+		if(wordState !== null) {
+			let correctGuessCount = 0;
+			wordState.map(letter => {
+				if(letter.hasBeenSelected === true) {
+					correctGuessCount++;
+					if(correctGuessCount === wordState.length) {
+						console.log('You Win');
+						setOutcome('w');
+						setEndGame(true);
+					}
+				}
+				return letter;
+			});
+		}
+	}
+
+	let lossCheck = () => {
+		if(missCount === missesArray.length) {
+			console.log('You Lose');
+			setOutcome('l');
+			setEndGame(true);
+		}
+	}
 	
 	useEffect(() => {
 		guessCheck();
 		missCheck();
+		lossCheck();
+		winCheck();
 	}); 
-
-	useEffect(() => {
-		if(missCount === missesArray.length) {
-			//console.log('Game over');
-			setEndGame(true);
-		}
-	}, [missCount, missesArray]);
 
 	let handleLetterSelect = (e) => {
 		setLetterGuess(e.target.innerHTML.toUpperCase());
@@ -102,22 +125,27 @@ const Game = () => {
 	}	
 
 	let renderedFigures = missesArray.map((i) => {
-		return <Figure key={i} number={i} missCount={missCount}/>
+		return <Figure key={i} number={i} missCount={missCount} endGame={endGame}/>
 	})
 	 
 
 	return (
-		<div className={classes.MainDiv}>
-			<Background />
-			<div className={classes.FigureDiv}>
-				{renderedFigures}
-			</div>
-			<Gallows />
-			<div className={classes.LetterDiv}>
-				{wordState !== null ? renderedWord : null}
-			</div>
-			<div className={classes.KeypadDiv}>
-				<Keypad endGame={endGame} letterClick={handleLetterSelect} selectedTarget={letterGuess}/>
+		<div className={endGame ? classes.LosingCondition : null}>
+			<div className={classes.MainDiv}>
+				<Background />
+				<div className={classes.FigureDiv}>
+					{renderedFigures}
+				</div>
+				<Gallows />
+				{endGame ? <div className={classes.EndingMessageDiv}>
+					<EndingMessage outcome={outcome}/>
+				</div> : null}
+				<div className={classes.LetterDiv}>
+					{wordState !== null ? renderedWord : null}
+				</div>
+				<div className={classes.KeypadDiv}>
+					<Keypad endGame={endGame} letterClick={handleLetterSelect} selectedTarget={letterGuess}/>
+				</div>
 			</div>
 		</div>
 	);

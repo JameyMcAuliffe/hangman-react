@@ -4,12 +4,22 @@
 	justify-content: center;
 }
 
+.LosingCondition {
+	background: rgba(25, 25, 25, .8);
+}
+
 .LetterDiv {
 	display: flex;
 	position: absolute;
 	z-index: 0;
 	bottom: 15%;
 	flex-direction: row;
+}
+
+.EndingMessageDiv {
+	position: absolute;
+	z-index: 1;
+	top: 30%;
 }
 
 .KeypadDiv {
