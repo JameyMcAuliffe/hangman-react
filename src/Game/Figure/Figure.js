@@ -5,8 +5,10 @@ import StickFigure from '../../images/figure.png';
 
 const Figure = (props) => {
 
+	let backgroundDiv = props.endGame ? classes.LosingCondition : classes.MissedFigureDiv;
+
 	return (
-		<div className={props.missCount >= props.number ? classes.MissedFigureDiv : classes.FigureDiv}>
+		<div className={props.missCount >= props.number ? backgroundDiv : classes.FigureDiv}>
 			<img src={StickFigure} alt="stick-figure" className={classes.Figure}/>
 		</div>
 	);

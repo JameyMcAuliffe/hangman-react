@@ -12,10 +12,8 @@
 	margin: 0px 5px;
 }
 
-.MissedFigureRedDiv {
-	background-color: red;
+.LosingCondition {
 	padding-top: 3px;
-	border-radius: 5px;
 	margin: 0px 5px;
 }
 
