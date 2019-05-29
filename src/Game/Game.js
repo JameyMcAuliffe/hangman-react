@@ -138,7 +138,7 @@ const Game = () => {
 				</div>
 				<Gallows />
 				{endGame ? <div className={classes.EndingMessageDiv}>
-					<EndingMessage outcome={outcome}/>
+					<EndingMessage outcome={outcome} word={splitWord.join('')}/>
 				</div> : null}
 				<div className={classes.LetterDiv}>
 					{wordState !== null ? renderedWord : null}

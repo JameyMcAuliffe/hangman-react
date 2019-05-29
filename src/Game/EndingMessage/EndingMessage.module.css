@@ -1,13 +1,22 @@
-.LosingMessage {
-	border: 4px solid red;
-	padding: 20px;
-	color: red;
-	background-color: black;
+.Message {
+	font-family: 'Tangerine', cursive;
+	font-size: 25px;
 }
 
-.WinningMessage {
-	border: 4px solid gold;
+.MessageDiv {
+	background-color: #ffefcb;
 	padding: 20px;
+	border: #705648 solid 4px;
+}
+
+.Button {
+	cursor: pointer;
+	background-color: #705648;
+	color: #ffefcb;
+	font-size: 20px;
+	border: black solid 1px;
+}
+
+.Button:hover {
 	color: gold;
-	background-color: blue;
 }
