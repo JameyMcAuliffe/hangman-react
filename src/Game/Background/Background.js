@@ -9,4 +9,3 @@ const Background = () => (
 
 export default Background;
 
-//<img src={Gallows} alt="gallows" className={classes.Gallows}/>

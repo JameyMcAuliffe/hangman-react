@@ -1,0 +1,62 @@
+.Main {
+	position: relative;
+	display: flex;
+	justify-content: center
+}
+
+.Background {
+	height: 100vh;
+	width: 100%;
+	z-index: -1;
+}
+
+.Hangman {
+	position: absolute;
+	z-index: 0;
+	top: 20%;
+	font-size: 100px;
+	font-family: 'Playfair Display', serif;
+	border: #ffefcb dashed 6px;
+	color: #ffefcb;
+	background-color: #705648;
+	padding: 10px;
+	cursor: pointer;
+	text-shadow: 4px 4px black;
+}
+
+.Hangman:hover {
+	color: gold;
+	border: gold dashed 6px;
+}
+
+.Button {
+	cursor: pointer;
+	background-color: #705648;
+	color: #ffefcb;
+	font-size: 20px;
+	border: black solid 1px;
+}
+
+.Button:hover {
+	color: gold;
+}
+
+.InstructionsDiv {
+	position: absolute;
+	top: 15%;
+	width: 50%;
+	z-index: 0;
+	background-color: #ffefcb;
+	padding: 20px;
+	border: #705648 solid 4px;
+}
+
+.Instructions {
+	font-family: 'Tangerine', cursive;
+	font-size: 25px;
+}
+
+.Signature {
+	font-family: 'Pinyon Script', cursive;
+	font-size: 45px;
+}
