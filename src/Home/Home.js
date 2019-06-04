@@ -6,7 +6,7 @@ import classes from './Home.module.css';
 
 const Home = () => {
 
-	const INTRUCTIONS = "You are a criminal, a scoundrel, not worthy of life, and are scheduled for the gallows at high noon.  However, while your guilt is indisputable, I fancy myself a gaming Sheriff, and offer you one chance at redemption...I'm thinking of a word, to you, a very important word, and if you can guess this word, the prize will be your freedom.";
+	const INTRUCTIONS = "You are a criminal, a scoundrel, not worthy of life, and are scheduled for the gallows at high noon.  However, while your guilt is indisputable, I fancy myself a gaming Sheriff, and offer you one chance at redemption...I'm thinking of a word, to you, a very important word, and if you can guess it, the prize will be your freedom.  The game is Hangman.";
 
 	const [showInstructions, setShowInstructions] = useState(false);
 

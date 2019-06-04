@@ -29,7 +29,6 @@ const Game = () => {
 	useEffect(() => {
 		getWord()
 			.then(data => {
-				console.log(data.data.word);
 				return data.data.word.toUpperCase().split('');
 			})
 			.then (wordArray => {
@@ -88,7 +87,6 @@ const Game = () => {
 				if(letter.hasBeenSelected === true) {
 					correctGuessCount++;
 					if(correctGuessCount === wordState.length) {
-						console.log('You Win');
 						setOutcome('w');
 						setEndGame(true);
 					}
@@ -100,7 +98,6 @@ const Game = () => {
 
 	let lossCheck = () => {
 		if(missCount === missesArray.length) {
-			console.log('You Lose');
 			setOutcome('l');
 			setEndGame(true);
 		}
