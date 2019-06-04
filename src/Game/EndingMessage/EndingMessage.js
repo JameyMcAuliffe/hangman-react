@@ -9,9 +9,9 @@ const EndingMessage = (props) => {
 	let buttonText = ''
 	if(props.outcome === 'w') {
 		endingMessage = 'Congratulations, your freedom shall be granted!  You have to promise though, No More Criminal Mischief!';
-		buttonText = 'Cross My Heart and Hope To Die'
+		buttonText = 'You Got It!'
 	}	else if(props.outcome === 'l') {
-		endingMessage = `I'm sorry, the word you were looking for was "${props.word}.  Perhaps you will read more in your next life..."`;
+		endingMessage = `I'm sorry, the word you were looking for was "${props.word}."  Perhaps you will read more in your next life...`;
 		buttonText = 'I Regret Nothing';
 	}
 
