@@ -13,7 +13,7 @@ const Game = () => {
 
 
 
-	const [splitWord, setSplitWord] = useState(null);
+	const [splitWord, setSplitWord] = useState(null); 
 	const [wordState, setWordState] = useState(null);
 	const [letterGuess, setLetterGuess] = useState(null);
 	const [guessMade, setGuessMade] = useState(false);
@@ -22,8 +22,8 @@ const Game = () => {
 	const [endGame, setEndGame] = useState(false);
 	const [outcome, setOutcome] = useState(null);
 
-	let missesArray = [1, 2, 3, 4, 5, 6];
-	let objectArray = [];
+	let missesArray = [1, 2, 3, 4, 5, 6]; //determines number of allowed misses
+	let objectArray = []; 
 	let renderedWord;
 
 	useEffect(() => {
@@ -37,7 +37,7 @@ const Game = () => {
 				wordArray.map((letter) => {
 					let hasBeenSelected = false;
 					if (letter === '-') {
-						hasBeenSelected = true;
+						hasBeenSelected = true; //hyphens automatically shown
 					}
 					let objectItem = {letter, hasBeenSelected};
 					objectArray.push(objectItem);
@@ -53,9 +53,10 @@ const Game = () => {
 			wordState.map((letter, i) => {
 				if(letterGuess === letter.letter.toUpperCase() && !letter.hasBeenSelected) {
 					let updatedWordState = [...wordState];
-					updatedWordState[i].hasBeenSelected = true;
+					updatedWordState[i].hasBeenSelected = true; 
 					setWordState(updatedWordState);
 					setCorrectGuess(true);
+					//flashes letter background color for correct guesses
 					setTimeout(() => {
 						setCorrectGuess(null);
 					}, 1000);
@@ -121,6 +122,7 @@ const Game = () => {
 		});
 	}	
 
+	//stick figures displaying allowed misses left
 	let renderedFigures = missesArray.map((i) => {
 		return <Figure key={i} number={i} missCount={missCount} endGame={endGame}/>
 	})
